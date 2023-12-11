@@ -41,3 +41,21 @@ await M.init(); // on attend que les données soient chargées
 
 // creating events in the calendar
 V.uicalendar.createEvents(M.getEvents("mmi1"));
+
+// create buttons to go to the next and previous week in the calendar and current week
+let btnPrev = document.getElementById("btnPrev");
+let btnNext = document.getElementById("btnNext");
+let btnToday = document.getElementById("btnToday");
+
+// make the buttons work
+btnPrev.addEventListener("click", () => {
+  V.uicalendar.prev();
+});
+
+btnNext.addEventListener("click", () => {
+  V.uicalendar.next();
+});
+
+btnToday.addEventListener("click", () => {
+  V.uicalendar.today();
+});
