@@ -19,26 +19,6 @@ window.M = M; // on enregistre M dans la fenêtre pour pouvoir l'utiliser dans l
 // loadind data (and wait for it !)
 await M.init(); // on attend que les données soient chargées
 
-// sample events for testing
-// let edt = [
-//   {
-//     id: '1',
-//     calendarId: '1',
-//     title: 'my event',
-//     category: 'time',
-//     start: '2023-12-11T08:30:00',
-//     end: '2023-12-11T10:30:00',
-//   },
-//   {
-//     id: '2',
-//     calendarId: '1',
-//     title: 'second event',
-//     category: 'time',
-//     start: '2023-12-13T14:00:00',
-//     end: '2023-12-13T15:30:00',
-//   },
-// ]
-
 // creating events in the calendar
 // V.uicalendar.createEvents(M.getEvents("mmi1"));
 V.uicalendar.createEvents(
@@ -85,3 +65,81 @@ V.uicalendar.setCalendarColor("mmi3", {
   borderColor: "",
   dragBackgroundColor: "",
 });
+
+//===================== mmi1 =====================
+let events1 = M.getEvents("mmi1");
+for (let event of events1) {
+  if (event.title.includes(" CM ")) {
+    let changes = {
+      backgroundColor: "#af3c04",
+    };
+
+    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
+  }
+  if (event.title.includes(" TD ")) {
+    let changes = {
+      backgroundColor: "#fc8851",
+    };
+
+    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
+  }
+  if (event.title.includes(" TP ")) {
+    let changes = {
+      backgroundColor: "#fdccb4",
+    };
+
+    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
+  }
+}
+
+//===================== mmi2 =====================
+let events2 = M.getEvents("mmi2");
+for (let event of events2) {
+  if (event.title.includes(" CM ")) {
+    let changes = {
+      backgroundColor: "#4e218d",
+    };
+
+    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
+  }
+  if (event.title.includes(" TD ")) {
+    let changes = {
+      backgroundColor: "#b487f3",
+    };
+
+    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
+  }
+  if (event.title.includes(" TP ")) {
+    let changes = {
+      backgroundColor: "#e6d7fb",
+    };
+
+    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
+  }
+}
+
+//===================== mmi3 =====================
+let events3 = M.getEvents("mmi3");
+for (let event of events3) {
+  if (event.title.includes(" CM ")) {
+    let changes = {
+      backgroundColor: "#225099",
+    };
+
+    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
+  }
+  if (event.title.includes(" TD ")) {
+    let changes = {
+      backgroundColor: "#9cc2ff",
+    };
+
+    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
+  }
+  if (event.title.includes(" TP ")) {
+    let changes = {
+      backgroundColor: "#ebf2ff",
+    };
+
+    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
+  }
+}
