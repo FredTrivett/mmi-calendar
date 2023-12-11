@@ -1,6 +1,8 @@
 import { M } from "./js/model.js";
 import { V } from "./js/view.js";
 
+window.M = M; // on enregistre M dans la fenêtre pour pouvoir l'utiliser dans la console
+
 /*
    Ce fichier correspond au contrôleur de l'application. Il est chargé de faire le lien entre le modèle et la vue.
    Le modèle et la vue sont définis dans les fichiers js/model.js et js/view.js et importés (M et V, parties "publiques") dans ce fichier.
@@ -13,30 +15,29 @@ import { V } from "./js/view.js";
 
    Exception : Afficher 1, 2 ou les 3 années de formation sans autre filtrage peut être géré uniquement au niveau de la vue.
 */
-   
 
 // loadind data (and wait for it !)
-await M.init();
+await M.init(); // on attend que les données soient chargées
 
 // sample events for testing
-let edt = [
-  {
-    id: '1',
-    calendarId: '1',
-    title: 'my event',
-    category: 'time',
-    start: '2023-12-11T08:30:00',
-    end: '2023-12-11T10:30:00',
-  },
-  {
-    id: '2',
-    calendarId: '1',
-    title: 'second event',
-    category: 'time',
-    start: '2023-12-13T14:00:00',
-    end: '2023-12-13T15:30:00',
-  },
-]
+// let edt = [
+//   {
+//     id: '1',
+//     calendarId: '1',
+//     title: 'my event',
+//     category: 'time',
+//     start: '2023-12-11T08:30:00',
+//     end: '2023-12-11T10:30:00',
+//   },
+//   {
+//     id: '2',
+//     calendarId: '1',
+//     title: 'second event',
+//     category: 'time',
+//     start: '2023-12-13T14:00:00',
+//     end: '2023-12-13T15:30:00',
+//   },
+// ]
 
 // creating events in the calendar
-V.uicalendar.createEvents( edt );
+V.uicalendar.createEvents(M.getEvents("mmi1"));

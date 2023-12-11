@@ -1,32 +1,34 @@
-
-import ical from 'ical';
-import { EventManager } from './class/event-manager';
+import ical from "ical";
+import { EventManager } from "./class/event-manager";
 
 let Events = {
-    mmi1: null,
-    mmi2: null,
-    mmi3: null
-}
+  mmi1: null,
+  mmi2: null,
+  mmi3: null,
+}; // les donnes sont stockées ici, il n'est pas exporter donc pas visible depuis l'extérieur personne ne peut les modifier
 
-let M = {};
+let M = {}; // on ne met que ce que l'on veut rendre visible depuis l'extérieur
+// c'est de l'encapsulation
 
-M.getEvents = function(annee) {
-    if ( annee in Events ) {
-        return Events[annee].toObject();
-    }
-    return null;
-}
+M.getEvents = function (annee) {
+  if (annee in Events) {
+    return Events[annee].toObject();
+  }
+  return null;
+};
 
-M.init = async function() {
-    let data = await fetch('./data/mmi1.ics');
-    data = await data.text();
-    data = ical.parseICS(data);
-    Events.mmi1 = new EventManager('mmi1', 'MMI 1', 'Agenda des MMI 1');
-    Events.mmi1.addEvents(data);
-}
+M.init = async function () {
+  let data = await fetch("./data/mmi1.ics"); // on charge de ICS
+  data = await data.text(); // extrait au format texte
+  data = ical.parseICS(data); // on convertis le contenu du fichier ics pour que ce soit exploitable
+  //   console.log(data);
+  Events.mmi1 = new EventManager("mmi1", "MMI 1", "Agenda des MMI 1"); // on crée un nouvel objet
+  Events.mmi1.addEvents(data); // on ajoute les données
+  // les deux classes sont dans le dossier class
+  console.log(Events.mmi1);
+};
 
 export { M };
-
 
 /*
     On notera que si tout ce qui est dans ce fichier concerne le modèle, seul ce qui est dans M est exporté (et donc accessible depuis l'extérieur).
