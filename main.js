@@ -40,7 +40,11 @@ await M.init(); // on attend que les données soient chargées
 // ]
 
 // creating events in the calendar
-V.uicalendar.createEvents(M.getEvents("mmi1"));
+// V.uicalendar.createEvents(M.getEvents("mmi1"));
+V.uicalendar.createEvents(
+  M.getEvents("mmi1").concat(M.getEvents("mmi2"), M.getEvents("mmi3"))
+);
+// V.uicalendar.createEvents(M.getEvents("mmi3"));
 
 // create buttons to go to the next and previous week in the calendar and current week
 let btnPrev = document.getElementById("btnPrev");
@@ -58,4 +62,26 @@ btnNext.addEventListener("click", () => {
 
 btnToday.addEventListener("click", () => {
   V.uicalendar.today();
+});
+
+// change calendars colors
+V.uicalendar.setCalendarColor("mmi1", {
+  color: "#ffffff",
+  backgroundColor: "#fb5607",
+  borderColor: "",
+  dragBackgroundColor: "",
+});
+
+V.uicalendar.setCalendarColor("mmi2", {
+  color: "#ffffff",
+  backgroundColor: "#8338ec",
+  borderColor: "",
+  dragBackgroundColor: "",
+});
+
+V.uicalendar.setCalendarColor("mmi3", {
+  color: "#ffffff",
+  backgroundColor: "#3a86ff",
+  borderColor: "",
+  dragBackgroundColor: "",
 });

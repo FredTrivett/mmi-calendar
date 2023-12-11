@@ -8,7 +8,7 @@ class Event {
   #groups; // toutes les information utiles
   // les groupes sont deja fait
 
-  constructor(id, summary, description, start, end, location) {
+  constructor(id, summary, description, start, end, location, sourceFile) {
     this.#id = id;
     this.#summary = summary.slice(0, summary.lastIndexOf(","));
     this.#description = description;
@@ -19,6 +19,7 @@ class Event {
     this.#groups = summary.slice(summary.lastIndexOf(",") + 1);
     this.#groups = this.#groups.split(".");
     this.#groups = this.#groups.map((gr) => gr.replace(/\s/g, ""));
+    this.sourceFile = sourceFile;
   }
 
   // pour faire des accesseur -> regarder dans la doc

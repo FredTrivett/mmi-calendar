@@ -18,13 +18,32 @@ M.getEvents = function (annee) {
 };
 
 M.init = async function () {
-  let data = await fetch("./data/mmi1.ics"); // on charge de ICS
-  data = await data.text(); // extrait au format texte
-  data = ical.parseICS(data); // on convertis le contenu du fichier ics pour que ce soit exploitable
-  //   console.log(data);
-  Events.mmi1 = new EventManager("mmi1", "MMI 1", "Agenda des MMI 1"); // on crée un nouvel objet
-  Events.mmi1.addEvents(data); // on ajoute les données
-  // les deux classes sont dans le dossier class
+  let data = {};
+
+  // Load mmi1.ics
+  let response1 = await fetch("./data/mmi1.ics");
+  let text1 = await response1.text();
+  data.mmi1 = ical.parseICS(text1);
+
+  // Load mmi2.ics
+  let response2 = await fetch("./data/mmi2.ics");
+  let text2 = await response2.text();
+  data.mmi2 = ical.parseICS(text2);
+
+  // Load mmi3.ics
+  let response3 = await fetch("./data/mmi3.ics");
+  let text3 = await response3.text();
+  data.mmi3 = ical.parseICS(text3);
+
+  Events.mmi1 = new EventManager("mmi1", "MMI 1", "Agenda des MMI 1");
+  Events.mmi1.addEvents(data.mmi1);
+
+  Events.mmi2 = new EventManager("mmi2", "MMI 2", "Agenda des MMI 2");
+  Events.mmi2.addEvents(data.mmi2);
+
+  Events.mmi3 = new EventManager("mmi3", "MMI 3", "Agenda des MMI 3");
+  Events.mmi3.addEvents(data.mmi3);
+
   console.log(Events.mmi1);
 };
 
