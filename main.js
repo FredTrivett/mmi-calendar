@@ -48,6 +48,7 @@ const groups = {
   mmi3: ["G1", "G2", "G3"],
 };
 
+// show/hide year
 let yearKeys = Object.keys(groups);
 
 for (let year of yearKeys) {
@@ -60,4 +61,21 @@ for (let year of yearKeys) {
   V.uicalendar.setCalendarVisibility(year, checkbox.checked);
 }
 
+// show/hide groups
+for (let year of yearKeys) {
+  let groupId = document.getElementById(year + "Select");
+  groupId.addEventListener("change", function () {
+    let groupCalendar = groupId.value;
+    // console.log(groupCalendar);
+    // only show the events from the calendar that contain the group
+    V.uicalendar.setCalendarVisibility(year, false, (event) => {
+      console.log(V.uicalendar.title);
+
+      return !event.title.includes(groupCalendar);
+    });
+
+
+  });
+
+}
 // attendies 
