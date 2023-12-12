@@ -40,8 +40,6 @@ btnToday.addEventListener("click", () => {
   V.uicalendar.today();
 });
 
-const calendars = ["mmi1", "mmi2", "mmi3"];
-
 const groups = {
   mmi1: ["G1", "G21", "G22", "G3"],
   mmi2: ["G1", "G21", "G22", "G3"],
@@ -64,6 +62,7 @@ for (let year of yearKeys) {
 // show/hide groups
 for (let year of yearKeys) {
   let groupId = document.getElementById(year + "Select");
+
   groupId.addEventListener("change", function () {
     let groupCalendar = groupId.value;
     console.log(groupCalendar);
@@ -82,14 +81,3 @@ for (let year of yearKeys) {
   });
 
 }
-
-// let events1 = M.getEvents("mmi1");
-// for (let event of events1) {
-//   if (event.title.includes(" CM ")) {
-//     let changes = {
-//       backgroundColor: "#af3c04",
-//     };
-
-//     V.uicalendar.updateEvent(event.id, event.calendarId, changes);
-//   }
-// attendies 
