@@ -45,7 +45,7 @@ const calendars = ["mmi1", "mmi2", "mmi3"];
 const groups = {
   mmi1: ["G1", "G2", "G3", "G4"],
   mmi2: ["G1", "G21", "G22", "G3"],
-  mmi3: ["G1", "G2", "G3"],
+  mmi3: ["G1", "G21", "G22", "G3"],
 };
 
 // show/hide year
@@ -66,16 +66,30 @@ for (let year of yearKeys) {
   let groupId = document.getElementById(year + "Select");
   groupId.addEventListener("change", function () {
     let groupCalendar = groupId.value;
-    // console.log(groupCalendar);
-    // only show the events from the calendar that contain the group
-    V.uicalendar.setCalendarVisibility(year, false, (event) => {
-      console.log(V.uicalendar.title);
+    console.log(groupCalendar);
 
-      return !event.title.includes(groupCalendar);
-    });
-
-
+    let events = M.getEvents(year);
+    // console.log(year);
+    for (let event of events) {
+      let changes = {};
+      if (event.group.toString().includes(groupCalendar)) {
+        changes.isVisible = true;
+      } else {
+        changes.isVisible = false;
+      }
+      V.uicalendar.updateEvent(event.id, event.calendarId, changes);
+    }
   });
 
 }
+
+// let events1 = M.getEvents("mmi1");
+// for (let event of events1) {
+//   if (event.title.includes(" CM ")) {
+//     let changes = {
+//       backgroundColor: "#af3c04",
+//     };
+
+//     V.uicalendar.updateEvent(event.id, event.calendarId, changes);
+//   }
 // attendies 

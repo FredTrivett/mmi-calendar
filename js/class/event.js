@@ -102,6 +102,7 @@ class Event {
       location: this.#location,
       backgroundColor: this.colour,
       borderColor: this.colour,
+      group: this.#groups
     };
   }
 }
