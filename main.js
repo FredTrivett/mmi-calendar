@@ -115,3 +115,6 @@ for (let calendar of calendars) {
 
   V.uicalendar.setCalendarVisibility(calendar, checkbox.checked); // show the calendar by default
 }
+
+
+// attendies 
