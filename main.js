@@ -40,22 +40,24 @@ btnToday.addEventListener("click", () => {
   V.uicalendar.today();
 });
 
-// choose mmi
-// detect if the checkbox is checked or not, if checked, the calendar will show the events of the class
-// if not, the calendar will not show the events of the class
-// the checkbox is checked by default
-
 const calendars = ["mmi1", "mmi2", "mmi3"];
 
-for (let calendar of calendars) {
-  let checkbox = document.getElementById(calendar); // get the checkbox 
+const groups = {
+  mmi1: ["G1", "G2", "G3", "G4"],
+  mmi2: ["G1", "G21", "G22", "G3"],
+  mmi3: ["G1", "G2", "G3"],
+};
 
-  checkbox.addEventListener("change", function () { // when the checkbox is checked or unchecked
-    V.uicalendar.setCalendarVisibility(calendar, this.checked); // show or hide the calendar
+let yearKeys = Object.keys(groups);
+
+for (let year of yearKeys) {
+  let checkbox = document.getElementById(year);
+
+  checkbox.addEventListener("change", function () {
+    V.uicalendar.setCalendarVisibility(year, this.checked);
   });
 
-  V.uicalendar.setCalendarVisibility(calendar, checkbox.checked); // show the calendar by default
+  V.uicalendar.setCalendarVisibility(year, checkbox.checked);
 }
-
 
 // attendies 
