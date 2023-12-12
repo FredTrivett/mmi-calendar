@@ -19,19 +19,15 @@ window.M = M; // on enregistre M dans la fenêtre pour pouvoir l'utiliser dans l
 // loadind data (and wait for it !)
 await M.init(); // on attend que les données soient chargées
 
-// creating events in the calendar
-// V.uicalendar.createEvents(M.getEvents("mmi1"));
 V.uicalendar.createEvents(
   M.getEvents("mmi1").concat(M.getEvents("mmi2"), M.getEvents("mmi3"))
 );
-// V.uicalendar.createEvents(M.getEvents("mmi3"));
 
 // create buttons to go to the next and previous week in the calendar and current week
 let btnPrev = document.getElementById("btnPrev");
 let btnNext = document.getElementById("btnNext");
 let btnToday = document.getElementById("btnToday");
 
-// make the buttons work
 btnPrev.addEventListener("click", () => {
   V.uicalendar.prev();
 });
@@ -44,102 +40,78 @@ btnToday.addEventListener("click", () => {
   V.uicalendar.today();
 });
 
-// change calendars colors
-V.uicalendar.setCalendarColor("mmi1", {
-  color: "#ffffff",
-  backgroundColor: "#fb5607",
-  borderColor: "",
-  dragBackgroundColor: "",
-});
+// give default colors to the calendars
+const calendarDefault = {
+  mmi1: {
+    color: "#ffffff",
+    backgroundColor: "#fb5607",
+    borderColor: "",
+    dragBackgroundColor: "",
+  },
+  mmi2: {
+    color: "#ffffff",
+    backgroundColor: "#8338ec",
+    borderColor: "",
+    dragBackgroundColor: "",
+  },
+  mmi3: {
+    color: "#ffffff",
+    backgroundColor: "#3a86ff",
+    borderColor: "",
+    dragBackgroundColor: "",
+  },
+};
 
-V.uicalendar.setCalendarColor("mmi2", {
-  color: "#ffffff",
-  backgroundColor: "#8338ec",
-  borderColor: "",
-  dragBackgroundColor: "",
-});
+for (let calendar in calendarDefault) {
+  V.uicalendar.setCalendarColor(calendar, calendarDefault[calendar]);
+}
 
-V.uicalendar.setCalendarColor("mmi3", {
-  color: "#ffffff",
-  backgroundColor: "#3a86ff",
-  borderColor: "",
-  dragBackgroundColor: "",
-});
+// change the individual events colors
+const calendarColors = {
+  mmi1: {
+    CM: "#af3c04",
+    TD: "#fc8851",
+    TP: "#fdccb4",
+  },
+  mmi2: {
+    CM: "#4e218d",
+    TD: "#b487f3",
+    TP: "#e6d7fb",
+  },
+  mmi3: {
+    CM: "#225099",
+    TD: "#9cc2ff",
+    TP: "#ebf2ff",
+  },
+};
 
-//===================== mmi1 =====================
-let events1 = M.getEvents("mmi1");
-for (let event of events1) {
-  if (event.title.includes(" CM ")) {
-    let changes = {
-      backgroundColor: "#af3c04",
-    };
-
-    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
-  }
-  if (event.title.includes(" TD ")) {
-    let changes = {
-      backgroundColor: "#fc8851",
-    };
-
-    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
-  }
-  if (event.title.includes(" TP ")) {
-    let changes = {
-      backgroundColor: "#fdccb4",
-    };
-
-    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
+for (let calendar in calendarColors) { // for each calendar
+  let events = M.getEvents(calendar); // get the events of the calendar
+  for (let event of events) { // for each event
+    for (let type in calendarColors[calendar]) { // for each type of event
+      if (event.title.includes(type)) { // if the event title contains the type of the event
+        let changes = {
+          backgroundColor: calendarColors[calendar][type], // change the background color of the event
+        };
+        V.uicalendar.updateEvent(event.id, event.calendarId, changes); // update the event color
+      }
+    }
   }
 }
 
-//===================== mmi2 =====================
-let events2 = M.getEvents("mmi2");
-for (let event of events2) {
-  if (event.title.includes(" CM ")) {
-    let changes = {
-      backgroundColor: "#4e218d",
-    };
+// choose mmi
+// detect if the checkbox is checked or not, if checked, the calendar will show the events of the class
+// if not, the calendar will not show the events of the class
+// the checkbox is checked by default
 
-    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
-  }
-  if (event.title.includes(" TD ")) {
-    let changes = {
-      backgroundColor: "#b487f3",
-    };
+const calendars = ["mmi1", "mmi2", "mmi3"];
 
-    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
-  }
-  if (event.title.includes(" TP ")) {
-    let changes = {
-      backgroundColor: "#e6d7fb",
-    };
+for (let calendar of calendars) {
+  let checkbox = document.getElementById(calendar); // get the checkbox 
 
-    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
-  }
-}
+  checkbox.addEventListener("change", function () { // when the checkbox is checked or unchecked
+    V.uicalendar.setCalendarVisibility(calendar, this.checked); // show or hide the calendar
+  });
 
-//===================== mmi3 =====================
-let events3 = M.getEvents("mmi3");
-for (let event of events3) {
-  if (event.title.includes(" CM ")) {
-    let changes = {
-      backgroundColor: "#225099",
-    };
-
-    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
-  }
-  if (event.title.includes(" TD ")) {
-    let changes = {
-      backgroundColor: "#9cc2ff",
-    };
-
-    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
-  }
-  if (event.title.includes(" TP ")) {
-    let changes = {
-      backgroundColor: "#ebf2ff",
-    };
-
-    V.uicalendar.updateEvent(event.id, event.calendarId, changes);
-  }
+  V.uicalendar.setCalendarVisibility(calendar, checkbox.checked); // show the calendar by default
 }
