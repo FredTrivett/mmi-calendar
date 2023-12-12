@@ -43,7 +43,7 @@ btnToday.addEventListener("click", () => {
 const calendars = ["mmi1", "mmi2", "mmi3"];
 
 const groups = {
-  mmi1: ["G1", "G2", "G3", "G4"],
+  mmi1: ["G1", "G21", "G22", "G3"],
   mmi2: ["G1", "G21", "G22", "G3"],
   mmi3: ["G1", "G21", "G22", "G3"],
 };
