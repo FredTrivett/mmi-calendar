@@ -40,65 +40,6 @@ btnToday.addEventListener("click", () => {
   V.uicalendar.today();
 });
 
-// give default colors to the calendars
-const calendarDefault = {
-  mmi1: {
-    color: "#ffffff",
-    backgroundColor: "#fb5607",
-    borderColor: "",
-    dragBackgroundColor: "",
-  },
-  mmi2: {
-    color: "#ffffff",
-    backgroundColor: "#8338ec",
-    borderColor: "",
-    dragBackgroundColor: "",
-  },
-  mmi3: {
-    color: "#ffffff",
-    backgroundColor: "#3a86ff",
-    borderColor: "",
-    dragBackgroundColor: "",
-  },
-};
-
-for (let calendar in calendarDefault) {
-  V.uicalendar.setCalendarColor(calendar, calendarDefault[calendar]);
-}
-
-// change the individual events colors
-const calendarColors = {
-  mmi1: {
-    CM: "#af3c04",
-    TD: "#fc8851",
-    TP: "#fdccb4",
-  },
-  mmi2: {
-    CM: "#4e218d",
-    TD: "#b487f3",
-    TP: "#e6d7fb",
-  },
-  mmi3: {
-    CM: "#225099",
-    TD: "#9cc2ff",
-    TP: "#ebf2ff",
-  },
-};
-
-for (let calendar in calendarColors) { // for each calendar
-  let events = M.getEvents(calendar); // get the events of the calendar
-  for (let event of events) { // for each event
-    for (let type in calendarColors[calendar]) { // for each type of event
-      if (event.title.includes(type)) { // if the event title contains the type of the event
-        let changes = {
-          backgroundColor: calendarColors[calendar][type], // change the background color of the event
-        };
-        V.uicalendar.updateEvent(event.id, event.calendarId, changes); // update the event color
-      }
-    }
-  }
-}
-
 // choose mmi
 // detect if the checkbox is checked or not, if checked, the calendar will show the events of the class
 // if not, the calendar will not show the events of the class
