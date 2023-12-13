@@ -123,3 +123,13 @@ for (let { button, view } of viewButtons) {
     V.uicalendar.changeView(view);
   });
 }
+
+// when in mobile mode, show the calendar in day view and when in desktop mode, show the calendar in week view
+const mediaQuery = window.matchMedia('(max-width: 768px)');
+mediaQuery.addEventListener('change', () => {
+  if (mediaQuery.matches) {
+    V.uicalendar.changeView('day');
+  } else {
+    V.uicalendar.changeView('week');
+  }
+});
