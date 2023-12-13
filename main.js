@@ -111,7 +111,7 @@ search.addEventListener("input", () => {
   V.uicalendar.createEvents(events);
 });
 
-// display day, week pr month
+// display day, week or month
 const viewButtons = [
   { button: btnDay, view: 'day' },
   { button: btnWeek, view: 'week' },

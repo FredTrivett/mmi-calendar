@@ -10,7 +10,7 @@ class Event {
   // les groupes sont deja fait
   #calendarColours = {
     mmi1: {
-      CM: "#af3c04",
+      CM: "#c84405",
       TD: "#fc8851",
       TP: "#fdccb4",
       Default: "#fb5607",
