@@ -87,7 +87,7 @@ for (let year of yearKeys) {
 // search input
 let search = document.getElementById("search");
 search.addEventListener("input", () => {
-  let searchText = search.value.toLowerCase();
+  let searchText = search.value.toLowerCase().split(" ");
   let events = [];
 
   for (let year of yearKeys) {
@@ -97,8 +97,14 @@ search.addEventListener("input", () => {
     }
   }
 
-  events = events.filter(event => event.title.toLowerCase().includes(searchText));
+  events = events.filter(event => {
+    return searchText.every(keyword => {
+      return event.title.toLowerCase().includes(keyword) || event.location.toLowerCase().includes(keyword);
+    });
+  });
 
   V.uicalendar.clear();
   V.uicalendar.createEvents(events);
 });
+
+// .every()
