@@ -77,8 +77,12 @@ for (let year of yearKeys) {
 
     let events = M.getEvents(year);
     events = events.filter(event => event.group.toString().includes(groupCalendar));
-    let searchText = search.value.toLowerCase();
-    events = events.filter(event => event.title.toLowerCase().includes(searchText));
+    let searchText = search.value.toLowerCase().split(" ");
+    events = events.filter(event => {
+      return searchText.every(keyword => {
+        return event.title.toLowerCase().includes(keyword) || event.location.toLowerCase().includes(keyword);
+      });
+    });
 
     V.uicalendar.createEvents(events);
   });
