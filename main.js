@@ -111,4 +111,15 @@ search.addEventListener("input", () => {
   V.uicalendar.createEvents(events);
 });
 
-// .every()
+// display day, week pr month
+const viewButtons = [
+  { button: btnDay, view: 'day' },
+  { button: btnWeek, view: 'week' },
+  { button: btnMonth, view: 'month' }
+];
+
+for (let { button, view } of viewButtons) {
+  button.addEventListener('click', () => {
+    V.uicalendar.changeView(view);
+  });
+}
