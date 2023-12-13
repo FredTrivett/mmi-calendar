@@ -19,10 +19,6 @@ window.M = M; // on enregistre M dans la fenêtre pour pouvoir l'utiliser dans l
 // loadind data (and wait for it !)
 await M.init(); // on attend que les données soient chargées
 
-V.uicalendar.createEvents(
-  M.getEvents("mmi1").concat(M.getEvents("mmi2"), M.getEvents("mmi3"))
-);
-
 // create buttons to go to the next and previous week in the calendar and current week
 let btnPrev = document.getElementById("btnPrev");
 let btnNext = document.getElementById("btnNext");
@@ -53,10 +49,18 @@ for (let year of yearKeys) {
   let checkbox = document.getElementById(year);
 
   checkbox.addEventListener("change", function () {
-    V.uicalendar.setCalendarVisibility(year, this.checked);
-  });
+    let events = [];
 
-  V.uicalendar.setCalendarVisibility(year, checkbox.checked);
+    for (let year of yearKeys) {
+      let checkbox = document.getElementById(year);
+      if (checkbox.checked) {
+        events = events.concat(M.getEvents(year));
+      }
+    }
+
+    V.uicalendar.clear();
+    V.uicalendar.createEvents(events);
+  });
 }
 
 // show/hide groups
@@ -66,18 +70,9 @@ for (let year of yearKeys) {
   groupId.addEventListener("change", function () {
     let groupCalendar = groupId.value;
     console.log(groupCalendar);
+    V.uicalendar.clear();
 
     let events = M.getEvents(year);
-    // console.log(year);
-    for (let event of events) {
-      let changes = {};
-      if (event.group.toString().includes(groupCalendar)) {
-        changes.isVisible = true;
-      } else {
-        changes.isVisible = false;
-      }
-      V.uicalendar.updateEvent(event.id, event.calendarId, changes);
-    }
+    V.uicalendar.createEvents(events.filter(event => event.group.toString().includes(groupCalendar)));
   });
-
 }
