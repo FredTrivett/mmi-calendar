@@ -58,6 +58,9 @@ for (let year of yearKeys) {
       }
     }
 
+    let searchText = search.value.toLowerCase();
+    events = events.filter(event => event.title.toLowerCase().includes(searchText));
+
     V.uicalendar.clear();
     V.uicalendar.createEvents(events);
   });
@@ -73,6 +76,29 @@ for (let year of yearKeys) {
     V.uicalendar.clear();
 
     let events = M.getEvents(year);
-    V.uicalendar.createEvents(events.filter(event => event.group.toString().includes(groupCalendar)));
+    events = events.filter(event => event.group.toString().includes(groupCalendar));
+    let searchText = search.value.toLowerCase();
+    events = events.filter(event => event.title.toLowerCase().includes(searchText));
+
+    V.uicalendar.createEvents(events);
   });
 }
+
+// search input
+let search = document.getElementById("search");
+search.addEventListener("input", () => {
+  let searchText = search.value.toLowerCase();
+  let events = [];
+
+  for (let year of yearKeys) {
+    let checkbox = document.getElementById(year);
+    if (checkbox.checked) {
+      events = events.concat(M.getEvents(year));
+    }
+  }
+
+  events = events.filter(event => event.title.toLowerCase().includes(searchText));
+
+  V.uicalendar.clear();
+  V.uicalendar.createEvents(events);
+});
