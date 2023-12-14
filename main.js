@@ -63,6 +63,11 @@ for (let year of yearKeys) {
 
     V.uicalendar.clear();
     V.uicalendar.createEvents(events);
+
+    // Update state
+    state.checkboxes.year[year] = checkbox.checked;
+    console.log(state);
+    localStorage.setItem('state', JSON.stringify(state));
   });
 }
 
@@ -85,10 +90,13 @@ for (let year of yearKeys) {
     });
 
     V.uicalendar.createEvents(events);
+
+    // Update state
+    state.selects.year[year] = groupCalendar;
+    console.log(state);
+    localStorage.setItem('state', JSON.stringify(state));
   });
 }
-
-// fair un objet qui contient les etats tout les parametres des selecteurs et des checkbox
 
 // search input
 let search = document.getElementById("search");
@@ -123,15 +131,46 @@ const viewButtons = [
 for (let { button, view } of viewButtons) {
   button.addEventListener('click', () => {
     V.uicalendar.changeView(view);
+    state.view.current = view; // Store the chosen view in the state
+    console.log(state);
+    localStorage.setItem('state', JSON.stringify(state));
   });
 }
 
-// when in mobile mode, show the calendar in day view and when in desktop mode, show the calendar in week view
-const mediaQuery = window.matchMedia('(max-width: 768px)');
-mediaQuery.addEventListener('change', () => {
-  if (mediaQuery.matches) {
-    V.uicalendar.changeView('day');
-  } else {
-    V.uicalendar.changeView('week');
+const storedState = localStorage.getItem('state');
+if (storedState) {
+  const parsedState = JSON.parse(storedState);
+  const storedView = parsedState.view.current;
+  V.uicalendar.changeView(storedView);
+} else {
+  const mediaQuery = window.matchMedia('(max-width: 768px)');
+  mediaQuery.addEventListener('change', () => {
+    if (mediaQuery.matches) {
+      V.uicalendar.changeView('day');
+    } else {
+      V.uicalendar.changeView('week');
+    }
+  });
+}
+
+const state = {
+  selects: {
+    year: yearKeys.reduce((acc, year) => { // acc = accumulator 
+      acc[year] = document.getElementById(year + "Select").value; // acc[year] = acc.mmi1 = document.getElementById("mmi1Select").value
+      return acc;
+    }, {})
+  },
+  checkboxes: {
+    year: yearKeys.reduce((acc, year) => {
+      acc[year] = document.getElementById(year).checked;
+      return acc;
+    }, {})
+  },
+  view: {
+    current: '' // Initialize the current view in the state
   }
-});
+};
+
+
+
+
