@@ -142,15 +142,6 @@ if (storedState) {
   const parsedState = JSON.parse(storedState);
   const storedView = parsedState.view.current;
   V.uicalendar.changeView(storedView);
-} else {
-  const mediaQuery = window.matchMedia('(max-width: 768px)');
-  mediaQuery.addEventListener('change', () => {
-    if (mediaQuery.matches) {
-      V.uicalendar.changeView('day');
-    } else {
-      V.uicalendar.changeView('week');
-    }
-  });
 }
 
 const state = {
@@ -167,7 +158,7 @@ const state = {
     }, {})
   },
   view: {
-    current: '' // Initialize the current view in the state
+    current: window.matchMedia('(max-width: 768px)').matches ? 'day' : 'week' // Set the current view based on device width
   }
 };
 
