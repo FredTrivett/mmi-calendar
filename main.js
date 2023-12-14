@@ -89,6 +89,12 @@ for (let year of yearKeys) {
 for (let year of yearKeys) {
   let groupId = document.getElementById(year + "Select");
 
+  // Retrieve selected group from local storage
+  let selectedGroup = localStorage.getItem(year + "SelectedGroup");
+  if (selectedGroup) {
+    groupId.value = selectedGroup;
+  }
+
   groupId.addEventListener("change", function () {
     let groupCalendar = groupId.value;
     console.log(groupCalendar);
@@ -104,8 +110,19 @@ for (let year of yearKeys) {
     });
 
     V.uicalendar.createEvents(events);
+
+    // Update selected group in local storage
+    localStorage.setItem(year + "SelectedGroup", groupCalendar);
+
+    //   checkbox.checked = selectedGroups[year] || false;
+    // if (checkbox.checked) {
+    //   let events = M.getEvents(year);
+    //   V.uicalendar.createEvents(events);
+    // }
   });
 }
+
+// fair un objet qui contient les etats tout les parametres des selecteurs et des checkbox
 
 // search input
 let search = document.getElementById("search");
