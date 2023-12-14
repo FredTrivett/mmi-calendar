@@ -162,6 +162,32 @@ const state = {
   }
 };
 
+// Retrieve stored state from local storage
+const storedSelect = localStorage.getItem('state');
+
+if (storedSelect) {
+  const parsedState = JSON.parse(storedSelect);
+
+  // Apply stored values to checkboxes
+  for (let year of yearKeys) {
+    const checkbox = document.getElementById(year);
+    if (parsedState.checkboxes.year[year]) {
+      checkbox.click(); // Simulate a click event to check the checkbox
+    }
+  }
+
+  // Apply stored values to selects
+  for (let year of yearKeys) {
+    const select = document.getElementById(year + "Select");
+    if (parsedState.selects.year[year]) {
+      select.value = parsedState.selects.year[year];
+    }
+  }
+
+  // Apply stored view
+  const storedView = parsedState.view.current;
+  V.uicalendar.changeView(storedView);
+}
 
 
 
