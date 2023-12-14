@@ -88,6 +88,8 @@ for (let year of yearKeys) {
   });
 }
 
+// fair un objet qui contient les etats tout les parametres des selecteurs et des checkbox
+
 // search input
 let search = document.getElementById("search");
 search.addEventListener("input", () => {
