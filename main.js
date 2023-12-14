@@ -42,6 +42,14 @@ const groups = {
   mmi3: ["G1", "G21", "G22", "G3"],
 };
 
+// Retrieve selected groups from local storage
+let selectedGroups = localStorage.getItem("selectedGroups");
+if (selectedGroups) {
+  selectedGroups = JSON.parse(selectedGroups);
+} else {
+  selectedGroups = {};
+}
+
 // show/hide year
 let yearKeys = Object.keys(groups);
 
@@ -63,7 +71,18 @@ for (let year of yearKeys) {
 
     V.uicalendar.clear();
     V.uicalendar.createEvents(events);
+
+    // Update selected groups in local storage
+    selectedGroups[year] = checkbox.checked;
+    localStorage.setItem("selectedGroups", JSON.stringify(selectedGroups));
   });
+
+  // Set the initial checked state based on the stored selection
+  checkbox.checked = selectedGroups[year] || false;
+  if (checkbox.checked) {
+    let events = M.getEvents(year);
+    V.uicalendar.createEvents(events);
+  }
 }
 
 // show/hide groups
