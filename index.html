@@ -5,61 +5,92 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MMI Calendar</title>
+  <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
 
-  <div>
+  <div class="container">
 
-    <button id="btnPrev">Prev</button>
-    <button id="btnToday">Today</button>
-    <button id="btnNext">Next</button>
+    <header class="menu">
+      <div>
+        <div class="affichage">
+          <button class="affichage__btn" id="btnDay">Jour</button>
+          <button class="affichage__btn" id="btnWeek">Semaine</button>
+          <button class="affichage__btn" id="btnMonth">Mois</button>
+        </div>
 
-    <input type="checkbox" id="mmi1" name="mmi1" value="mmi1">
-    <label for="mmi1">MMI 1</label>
-    <input type="checkbox" id="mmi2" name="mmi2" value="mmi2">
-    <label for="mmi2">MMI 2</label>
-    <input type="checkbox" id="mmi3" name="mmi3" value="mmi3">
-    <label for="mmi3">MMI 3</label>
+        <!-- select pour les groupes -->
 
-    <!-- select pour les groupes -->
-    <select name="mmi1Select" id="mmi1Select">
-      <option value="G">--BUT 1--</option>
-      <option value="G1">G1</option>
-      <option value="G21">G21</option>
-      <option value="G22">G22</option>
-      <option value="G3">G3</option>
-    </select>
+        <div class="mmiSelect">
+          <input class="mmiCheck" type="checkbox" id="mmi1" name="mmi1" value="mmi1">
+          <label class="mmiLabel" for="mmi1">MMI 1</label>
+          <input class="mmiCheck" type="checkbox" id="mmi2" name="mmi2" value="mmi2">
+          <label class="mmiLabel" for="mmi2">MMI 2</label>
+          <input class="mmiCheck" type="checkbox" id="mmi3" name="mmi3" value="mmi3">
+          <label class="mmiLabel" for="mmi3">MMI 3</label>
+        </div>
 
-    <select name="mmi2Select" id="mmi2Select">
-      <option value="G">--BUT 2--</option>
-      <option value="G1">G1</option>
-      <option value="G21">G21</option>
-      <option value="G22">G22</option>
-      <option value="G3">G3</option>
-    </select>
+        <div class="mmiGroup">
+          <select class="mmiGroup__select" name="mmi1Select" id="mmi1Select">
+            <option value="G">--BUT 1--</option>
+            <option value="G1">G1</option>
+            <option value="G21">G21</option>
+            <option value="G22">G22</option>
+            <option value="G3">G3</option>
+          </select>
 
-    <select name="mmi3Select" id="mmi3Select">
-      <option value="G">--BUT 3--</option>
-      <option value="G1">G1</option>
-      <option value="G21">G21</option>
-      <option value="G22">G22</option>
-      <option value="G3">G3</option>
-    </select>
+          <select class="mmiGroup__select" name="mmi2Select" id="mmi2Select">
+            <option value="G">--BUT 2--</option>
+            <option value="G1">G1</option>
+            <option value="G21">G21</option>
+            <option value="G22">G22</option>
+            <option value="G3">G3</option>
+          </select>
 
-    <input type="text" id="search">
+          <select class="mmiGroup__select" name="mmi3Select" id="mmi3Select">
+            <option value="G">--BUT 3--</option>
+            <option value="G1">G1</option>
+            <option value="G21">G21</option>
+            <option value="G22">G22</option>
+            <option value="G3">G3</option>
+          </select>
+        </div>
 
-    <button id="btnDay">Jour</button>
-    <button id="btnWeek">Semaine</button>
-    <button id="btnMonth">Mois</button>
+        <input class="mmiSearch" type="text" id="search" placeholder="Search">
+      </div>
 
-    <header>
-      <nav>
+      <div class="nextprev">
+        <button class="nextprev__btn" id="btnPrev"><svg width="34" height="34" viewBox="0 0 34 34" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M0 17C0 26.4 7.6 34 17 34C26.4 34 34 26.4 34 17C34 7.6 26.4 0 17 0C7.6 0 0 7.6 0 17ZM2 17C2 8.7 8.7 2 17 2C25.3 2 32 8.7 32 17C32 25.3 25.3 32 17 32C8.7 32 2 25.3 2 17ZM18.9 8.5L11.6 15.8H26.2V17.8H11.6L18.9 25.1L17.5 26.5L7.8 16.8L17.5 7.1L18.9 8.5Z" />
+          </svg>
+        </button>
+        <button class="nextprev__btn" id="btnToday"><svg width="34" height="34" viewBox="0 0 34 34" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M17 34C7.6 34 0 26.4 0 17C0 7.6 7.6 0 17 0C26.4 0 34 7.6 34 17C34 26.4 26.4 34 17 34ZM17 2C8.7 2 2 8.7 2 17C2 25.3 8.7 32 17 32C25.3 32 32 25.3 32 17C32 8.7 25.3 2 17 2Z" />
+          </svg>
+        </button>
+        <button class="nextprev__btn" id="btnNext"><svg width="34" height="34" viewBox="0 0 34 34" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M0 17C0 26.4 7.6 34 17 34C26.4 34 34 26.4 34 17C34 7.6 26.4 0 17 0C7.6 0 0 7.6 0 17ZM2 17C2 8.7 8.7 2 17 2C25.3 2 32 8.7 32 17C32 25.3 25.3 32 17 32C8.7 32 2 25.3 2 17ZM15.1 25.1L22.4 17.8H7.8V15.8H22.4L15.1 8.50001L16.5 7.10001L26.2 16.8L16.5 26.5L15.1 25.1Z" />
+          </svg>
+        </button>
+      </div>
 
-      </nav>
+      <input id="nav-check" class="hide__nav-check" type="checkbox">
+      <label for="nav-check" class="hide__nav"><svg width="34" height="34" viewBox="0 0 34 34" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M17 34C26.4 34 34 26.4 34 17C34 7.6 26.4 0 17 0C7.6 0 0 7.6 0 17C0 26.4 7.6 34 17 34ZM17 32C8.7 32 2 25.3 2 17C2 8.7 8.7 2 17 2C25.3 2 32 8.7 32 17C32 25.3 25.3 32 17 32ZM25.1 18.9L17.8 11.6V26.2H15.8L15.8 11.6L8.50001 18.9L7.10001 17.5L16.8 7.8L26.5 17.5L25.1 18.9Z"
+            fill="black" />
+        </svg></label>
     </header>
 
-    <main id="calendar" style="height: 800px"></main> <!-- ou toast UI s'affiche -->
+    <main class="calendar" id="calendar" style="height: 800px"></main> <!-- ou toast UI s'affiche -->
   </div>
 
   <!-- on doit pouvoir filtré on doit modifier le modele de plus pour les filtres -->

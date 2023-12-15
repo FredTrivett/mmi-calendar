@@ -189,5 +189,25 @@ if (storedSelect) {
   V.uicalendar.changeView(storedView);
 }
 
+const navCheck = document.getElementById('nav-check');
+const affichageElements = document.querySelectorAll('.affichage, .mmiGroup, .mmiSelect');
 
+navCheck.addEventListener('change', function () {
+  const displayValue = this.checked ? 'none' : '';
+  affichageElements.forEach(element => {
+    element.style.display = displayValue;
+  });
+});
 
+const mediaQuery = window.matchMedia('(min-width: 480px)');
+
+function handleMediaQuery(mediaQuery) {
+  const displayValue = mediaQuery.matches ? 'grid' : '';
+  affichageElements.forEach(element => {
+    element.style.display = displayValue;
+  });
+}
+
+handleMediaQuery(mediaQuery); // Initial check
+
+mediaQuery.addEventListener('change', handleMediaQuery); // Listen for changes in media query

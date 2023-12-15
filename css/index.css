@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Croissant+One&family=Inter:wght@300;500;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: #3b3b3b;
+    font-family: 'Croissant One', serif;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+.menu{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(226, 226, 226, 0.70);
+}
+
+.nextprev{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1em;
+    background-color: rgba(211, 211, 211, 0.7);
+}
+
+.nextprev__btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    padding: 1em 1em;
+    background-color: rgba(226, 226, 226, 0.00);
+    border: none;
+}
+
+.nextprev__btn svg{
+    width: 24px;
+    height: 24px;
+    text-shadow: 0 0 10px -5px #000;
+    fill: rgb(94, 94, 94);
+}
+
+.mmiSelect{
+    display: grid ;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.mmiCheck{
+    display: none;
+}
+
+.mmiLabel {
+    padding: 1em;
+    background-color: none;
+    text-align: center;
+    cursor: pointer;
+}
+
+.mmiCheck:checked + .mmiLabel {
+    background-color: rgba(211, 211, 211, 0.7);
+}
+
+.calendar{
+    width: 100%;
+    height: 100%;
+}
+
+.mmiSearch{
+    width: 100%;
+    padding: 1em;
+    background-color: rgba(211, 211, 211, 0.7);
+    border: none;
+    font: 1em;
+    cursor: pointer;
+}
+
+.affichage{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.affichage__btn{
+    width: 100%;
+    padding: 1em 0;
+    background-color: none;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.affichage__btn:hover{
+    background-color: rgba(211, 211, 211, 0.7);
+    transition: .3s;
+}
+
+.mmiGroup{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.mmiGroup__select{
+    padding: 1em 0;
+    background-color: rgba(211, 211, 211, 0);
+    border: none;
+    cursor: pointer;
+}
+
+.mmiGroup__select:hover{
+    background-color: rgba(211, 211, 211, 0.7);
+}
+
+.hide__nav-check{
+    display: none;
+}
+
+.hide__nav{
+    display: none;
+}
+
+@media only screen and (max-width: 480px) {
+    .container{
+        position: relative;
+        grid-template-columns: 1fr;
+    }
+
+    .nextprev__btn svg{
+        width: 34px;
+        height: 34px;
+    }
+
+    .nextprev{
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+    }
+
+    .menu{
+        position: relative;
+        height: fit-content;
+    }
+
+    .hide__nav-check{
+        display: none;
+    }
+
+    .hide__nav{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 1em;
+        bottom: -20px;
+        z-index: 999;
+        width: 40px;
+        height: 40px;
+        /* padding-top: 3px; */
+        background-color: rgba(154, 154, 154, 0.7);
+        border: none;
+        border-radius: 100%;
+    }
+
+    .hide__nav svg{
+        width: 24px;
+    }
+
+    .hide__nav-check:checked + .hide__nav{
+        transform: rotate(180deg);
+    }
+    
+}
